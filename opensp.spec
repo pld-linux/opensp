@@ -2,7 +2,7 @@ Summary:	OpenSP -- SGML parser
 Summary(pl):	OpenSP -- parser SGML
 %define	arname	OpenSP
 Name:		opensp
-Version:	1.5pre5
+Version:	1.5pre8
 Release:	1
 License:	Free (Copyright (C) 1999 The OpenJade group)
 Group:		Applications/Publishing/SGML
@@ -78,11 +78,7 @@ done
 ln -sf osx $RPM_BUILD_ROOT%{_bindir}/sgml2xml
 
 # I don't want to have it in docs
-rm -f doc/Makefile*
-
-gzip -9nf AUTHORS COPYING ChangeLog NEWS README
-
-%find_lang sp
+rm -f doc/Makefile* doc/.cvsignore
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -90,9 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-%files -f sp.lang
+%files
 %defattr(644,root,root,755)
-%doc doc *.gz
+%doc doc AUTHORS COPYING ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 

@@ -3,7 +3,7 @@ Summary(pl):	OpenSP -- parser SGML
 %define	arname	OpenSP
 Name:		opensp
 Version:	1.5
-Release:	2
+Release:	3
 Epoch:		1
 License:	Free (Copyright (C) 1999 The OpenJade group)
 Group:		Applications/Publishing/SGML
@@ -55,7 +55,8 @@ Biblioteki statyczne OpenSP.
 
 %prep
 %setup -q -n %{arname}-%{version}
-%patch -p1
+%patch0 -p1
+%patch1 -p1
 
 %build
 #please don't run gettextize --copy --force

@@ -3,7 +3,7 @@ Summary(pl):	OpenSP -- parser SGML
 %define	arname	OpenSP
 Name:		opensp
 Version:	1.4
-Release:	3
+Release:	4
 Copyright:	Copyright (c) 1999 The OpenJade group (free)
 Group:		Applications/Publishing/SGML
 Group(pl):	Aplikacje/Publikowanie/SGML
@@ -80,7 +80,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 cp -a $RPM_BUILD_ROOT%{_datadir}/%{arname}/* $RPM_BUILD_ROOT%{_datadir}/sgml/html/
 
 for i in nsgmls sgmlnorm spam spcat spent sx; do
-	ln -sf $i $RPM_BUILD_ROOT%{_bindir}/o$i
+	ln -sf o$i $RPM_BUILD_ROOT%{_bindir}/$i
 done
 
 # I don't want to have it in docs

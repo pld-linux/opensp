@@ -75,7 +75,7 @@ fi
 %configure \
 	--enable-default-catalog=%{_sysconfdir}/sgml/catalog \
 	--enable-default-search-path=%{sgmldir} \
-	--enable-http 
+	--enable-http
 
 %{__make}
 

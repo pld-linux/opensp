@@ -2,21 +2,18 @@ Summary:	OpenSP -- SGML parser
 Summary(pl):	OpenSP -- parser SGML
 %define	arname	OpenSP
 Name:		opensp
-Version:	1.4
-Release:	3
-Copyright:	Copyright (c) 1999 The OpenJade group (free)
+Version:	1.5pre5
+Release:	2
+Epoch:		1
+License:	Free (Copyright (C) 1999 The OpenJade group)
 Group:		Applications/Publishing/SGML
-Group(pl):	Aplikacje/Publikowanie/SGML
-Source0:	http://download.sourceforge.net/openjade/%{arname}-%{version}.tar.gz
-Source1:	%{arname}-html.catalog
-Patch0:		OpenSP-DESTDIR.patch
+Source0:	ftp://download.sourceforge.net/pub/sourceforge/openjade/%{arname}-%{version}.tar.gz
 URL:		http://openjade.sourceforge.net/
+Requires:	sgml-common >= 0.5-1
 Provides:	sgmlparser
-Requires:	sgml-common <= 0.2-4
-Prereq:		%{_sbindir}/fix-sgml-catalog
-Prereq:		/sbin/ldconfig
 Provides:	sp
 BuildRequires:	gettext-devel
+BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Conflicts:	openjade <= 1.3-1
 Obsoletes:	sp
@@ -31,86 +28,74 @@ pakiet zawiera parser SGML.
 Summary:	OpenSP header files
 Summary(pl):	Pliki nag³ówkowe OpenSP
 Group:		Development/Libraries
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
 
 %description devel
 OpenSP header files and devel documentation.
 
-%description -l pl devel
+%description devel -l pl
 Pliki nag³ówkowe OpenSP.
 
 %package static
 Summary:	Static OpenSP libraries
 Summary(pl):	Biblioteki statyczne OpenSP
 Group:		Development/Libraries
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
 
 %description static
 Static OpenSP libraries.
 
-%description -l pl static
+%description static -l pl
 Biblioteki statyczne OpenSP.
 
 %prep
 %setup -q -n %{arname}-%{version}
-%patch -p1 
 
 %build
 #please don't run gettextize --copy --force
-LDFLAGS="-s"
-export LDFLAGS
-%configure \
-	--enable-default-catalog=%{_datadir}/sgml/CATALOG:%{_prefix}/local/share/sgml/CATALOG:%{_sysconfdir}/sgml.catalog \
-	--enable-default-search-path=%{_datadir}/sgml:%{_prefix}/local/share/sgml
+#autoconf
+%configure2_13 \
+	--enable-default-catalog=%{_sysconfdir}/sgml/catalog \
+	--enable-default-search-path=%{_datadir}/sgml \
+	--datadir=%{_datadir}/sgml \
+	--enable-http
 
-make  
+%ifarch alpha
+%{__make} CXXFLAGS="%{!?debug:-O0}%{?debug:-O0 -g}"
+%else
+%{__make}
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_datadir}/sgml/{catalogs,html,%{name}}
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/sgml/catalogs/html.cat
+%{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-make install DESTDIR=$RPM_BUILD_ROOT
-
-cp -a $RPM_BUILD_ROOT%{_datadir}/%{arname}/* $RPM_BUILD_ROOT%{_datadir}/sgml/html/
-
-for i in nsgmls sgmlnorm spam spcat spent sx; do
-	ln -sf $i $RPM_BUILD_ROOT%{_bindir}/o$i
+for i in nsgmls sgmlnorm spam spcat spent; do
+	ln -sf o$i $RPM_BUILD_ROOT%{_bindir}/$i
 done
+
+# sx conficts with sx from lrzsz package
+ln -sf osx $RPM_BUILD_ROOT%{_bindir}/sgml2xml
 
 # I don't want to have it in docs
 rm -f doc/Makefile*
 
-ln -sf $RPM_BUILD_ROOT%{_bindir}/opensp
-strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
-
-gzip -9nf AUTHORS COPYING ChangeLog NEWS README TODO
+gzip -9nf AUTHORS COPYING ChangeLog NEWS README
 
 %find_lang sp
-
-%post   
-/sbin/ldconfig
-%{_sbindir}/fix-sgml-catalog
-
-%postun 
-/sbin/ldconfig
-%{_sbindir}/fix-sgml-catalog
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post	-p /sbin/ldconfig
+%postun -p /sbin/ldconfig
+
 %files -f sp.lang
 %defattr(644,root,root,755)
-%doc doc AUTHORS.gz COPYING.gz ChangeLog.gz NEWS.gz README.gz TODO.gz
+%doc doc *.gz
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
-%{_datadir}/sgml/html
-%{_datadir}/sgml/catalogs/*
 
 %files devel
 %defattr(644,root,root,755)
@@ -119,4 +104,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lib*.la
 
 %files static
-%attr(644,root,root) %{_libdir}/lib*.a
+%defattr(644,root,root,755)
+%{_libdir}/lib*.a

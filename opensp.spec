@@ -89,7 +89,6 @@ gzip -9nf AUTHORS COPYING ChangeLog NEWS README TODO
 /sbin/ldconfig
 %{_sbindir}/fix-sgml-catalog
 
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 

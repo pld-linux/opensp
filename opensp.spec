@@ -32,7 +32,7 @@ Obsoletes:	sp
 Package contains an SGML parser.
 
 %description -l pl
-pakiet zawiera parser SGML.
+Pakiet zawiera parser SGML.
 
 %package devel
 Summary:	OpenSP header files

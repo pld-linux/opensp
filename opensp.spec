@@ -15,6 +15,7 @@ URL:		http://openjade.sourceforge.net/
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake
 BuildRequires:	gettext-devel
+BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.4d
 Requires:	sgml-common >= 0.5-1
 Provides:	sgmlparser
@@ -37,6 +38,7 @@ Summary:	OpenSP header files
 Summary(pl):	Pliki nag³ówkowe OpenSP
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}
+Requires:	libstdc++-devel
 
 %description devel
 OpenSP header files and devel documentation.

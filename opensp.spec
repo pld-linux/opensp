@@ -2,16 +2,15 @@ Summary:	OpenSP -- SGML parser
 Summary(pl):	OpenSP -- parser SGML
 %define	arname	OpenSP
 Name:		opensp
-Version:	1.5
-Release:	5
+Version:	1.5.1
+Release:	1
 Epoch:		1
 License:	Free (Copyright (C) 1999 The OpenJade group)
 Group:		Applications/Publishing/SGML
 Source0:	http://dl.sourceforge.net/openjade/OpenSP-%{version}.tar.gz
-# Source0-md5: 87f56e79ae0c20397f4207d61d154303
+# Source0-md5:	f46fe0a04b76a4454ec27b7fcc84ec54
 Patch0:		%{name}-nolibnsl.patch
-Patch1:		%{name}-gcc33.patch
-Patch2:		%{name}-localedir.patch
+Patch1:		%{name}-localedir.patch
 URL:		http://openjade.sourceforge.net/
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake
@@ -61,7 +60,6 @@ Biblioteki statyczne OpenSP.
 %setup -q -n %{arname}-%{version}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 #please don't run gettextize --copy --force
@@ -82,7 +80,8 @@ fi
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT \
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT \
 	pkgdocdir=%{_defaultdocdir}/%{name}-%{version}
 
 for i in nsgmls sgmlnorm spam spcat spent; do
@@ -92,7 +91,7 @@ done
 # sx conficts with sx from lrzsz package
 ln -sf osx $RPM_BUILD_ROOT%{_bindir}/sgml2xml
 
-%find_lang sp
+%find_lang sp4
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -100,7 +99,7 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-%files -f sp.lang
+%files -f sp4.lang
 %defattr(644,root,root,755)
 %{_defaultdocdir}/%{name}-%{version}
 %attr(755,root,root) %{_bindir}/*

@@ -67,7 +67,11 @@ export LDFLAGS
 	--enable-default-catalog=%{_datadir}/sgml/CATALOG:%{_prefix}/local/share/sgml/CATALOG:%{_sysconfdir}/sgml.catalog \
 	--enable-default-search-path=%{_datadir}/sgml:%{_prefix}/local/share/sgml
 
-%{__make}  
+%ifarch alpha
+%{__make} CXXFLAGS="-O0"
+%else
+%{__make}
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT

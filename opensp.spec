@@ -3,7 +3,7 @@ Summary(pl):	OpenSP -- parser SGML
 %define	arname	OpenSP
 Name:		opensp
 Version:	1.4
-Release:	4
+Release:	5
 Copyright:	Copyright (c) 1999 The OpenJade group (free)
 Group:		Applications/Publishing/SGML
 Group(pl):	Aplikacje/Publikowanie/SGML
@@ -12,7 +12,7 @@ Source1:	%{arname}-html.catalog
 Patch0:		OpenSP-DESTDIR.patch
 URL:		http://openjade.sourceforge.net/
 Provides:	sgmlparser
-Requires:	sgml-common <= 0.2-4
+Requires:	sgml-common >= 0.2-4
 Prereq:		%{_sbindir}/fix-sgml-catalog
 Prereq:		/sbin/ldconfig
 Provides:	sp

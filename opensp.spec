@@ -3,7 +3,7 @@ Summary(pl):	OpenSP -- parser SGML
 %define	arname	OpenSP
 Name:		opensp
 Version:	1.4
-Release:	2
+Release:	3
 Copyright:	Copyright (c) 1999 The OpenJade group (free)
 Group:		Applications/Publishing/SGML
 Group(pl):	Aplikacje/Publikowanie/SGML
@@ -14,6 +14,8 @@ Provides:	sgmlparser
 Requires:	sgml-common <= 0.2-4
 Prereq:		%{_sbindir}/fix-sgml-catalog
 Prereq:		/sbin/ldconfig
+Provides:	sp
+BuildRequires:	gettext-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Conflicts:	openjade <= 1.3-1
 Obsoletes:	sp
@@ -56,6 +58,7 @@ Biblioteki statyczne OpenSP.
 %setup -q -n %{arname}-%{version}
 
 %build
+gettextize --copy --force
 LDFLAGS="-s"
 export LDFLAGS
 %configure \
@@ -67,18 +70,26 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_datadir}/sgml/{catalogs,html,%{name}}
+
 install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/sgml/catalogs/html.cat
 
 make install DESTDIR=$RPM_BUILD_ROOT
 
 cp -a $RPM_BUILD_ROOT%{_datadir}/%{arname}/* $RPM_BUILD_ROOT%{_datadir}/sgml/html/
 
+for i in nsgmls sgmlnorm spam spcat spent sx; do
+	ln -sf $i $RPM_BUILD_ROOT%{_bibdir}/o$i
+done
+
 # I don't want to have it in docs
 rm -f doc/Makefile*
 
+ln -sf $RPM_BUILD_ROOT%{_bindir}/opensp
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
 
 gzip -9nf AUTHORS COPYING ChangeLog NEWS README TODO
+
+%find_lang sp
 
 %post   
 /sbin/ldconfig
@@ -91,7 +102,7 @@ gzip -9nf AUTHORS COPYING ChangeLog NEWS README TODO
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f sp.lang
 %defattr(644,root,root,755)
 %doc doc AUTHORS.gz COPYING.gz ChangeLog.gz NEWS.gz README.gz TODO.gz
 %attr(755,root,root) %{_bindir}/*

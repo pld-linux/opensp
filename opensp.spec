@@ -6,10 +6,6 @@ Version:	1.4
 Release:	12
 License:	Copyright (c) 1999 The OpenJade group (free)
 Group:		Applications/Publishing/SGML
-Group(de):	Applikationen/Publizieren/SGML
-Group(es):	Aplicaciones/EditoraciСn/SGML
-Group(pl):	Aplikacje/Publikowanie/SGML
-Group(pt_BR):	AplicaГУes/EditoraГЦo/SGML
 Source0:	ftp://download.sourceforge.net/pub/sourceforge/openjade/%{arname}-%{version}.tar.gz
 Patch0:		OpenSP-DESTDIR.patch
 URL:		http://openjade.sourceforge.net/
@@ -32,13 +28,6 @@ pakiet zawiera parser SGML.
 Summary:	OpenSP header files
 Summary(pl):	Pliki nagЁСwkowe OpenSP
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
@@ -51,13 +40,6 @@ Pliki nagЁСwkowe OpenSP.
 Summary:	Static OpenSP libraries
 Summary(pl):	Biblioteki statyczne OpenSP
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static

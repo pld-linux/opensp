@@ -3,7 +3,7 @@ Summary(pl):	OpenSP -- parser SGML
 %define	arname	OpenSP
 Name:		opensp
 Version:	1.4
-Release:	7
+Release:	8
 LIcense:	Copyright (c) 1999 The OpenJade group (free)
 Group:		Applications/Publishing/SGML
 Group(de):	Applikationen/Publizieren/SGML
@@ -102,11 +102,11 @@ gzip -9nf AUTHORS COPYING ChangeLog NEWS README TODO
 
 %post   
 /sbin/ldconfig
-%attr(755,root,root) %{_sbindir}/fix-sgml-catalog
+/usr/sbin/fix-sgml-catalog
 
 %postun 
 /sbin/ldconfig
-%attr(755,root,root) %{_sbindir}/fix-sgml-catalog
+/usr/sbin/fix-sgml-catalog
 
 %clean
 rm -rf $RPM_BUILD_ROOT

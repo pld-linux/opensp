@@ -3,7 +3,7 @@ Summary(pl):	OpenSP -- parser SGML
 %define	arname	OpenSP
 Name:		opensp
 Version:	1.5
-Release:	3
+Release:	4
 Epoch:		1
 License:	Free (Copyright (C) 1999 The OpenJade group)
 Group:		Applications/Publishing/SGML
@@ -11,6 +11,7 @@ Source0:	http://dl.sourceforge.net/openjade/OpenSP-%{version}.tar.gz
 # Source0-md5: 87f56e79ae0c20397f4207d61d154303
 Patch0:		%{name}-nolibnsl.patch
 Patch1:		%{name}-gcc33.patch
+Patch2:		%{name}-localedir.patch
 URL:		http://openjade.sourceforge.net/
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake
@@ -22,6 +23,9 @@ Provides:	sp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Conflicts:	openjade <= 1.3-1
 Obsoletes:	sp
+
+%define		sgmldir		/usr/share/sgml
+%define		_datadir	%{sgmldir}
 
 %description
 Package contains an SGML parser.
@@ -57,6 +61,7 @@ Biblioteki statyczne OpenSP.
 %setup -q -n %{arname}-%{version}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 #please don't run gettextize --copy --force
@@ -69,8 +74,7 @@ fi
 %{__automake}
 %configure \
 	--enable-default-catalog=%{_sysconfdir}/sgml/catalog \
-	--enable-default-search-path=%{_datadir}/sgml \
-	--datadir=%{_datadir}/sgml \
+	--enable-default-search-path=%{sgmldir} \
 	--enable-http 
 
 %{__make}
@@ -101,7 +105,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_defaultdocdir}/%{name}-%{version}
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
-%{_datadir}/sgml/OpenSP
+%{sgmldir}/OpenSP
 %{_mandir}/man1/*
 
 %files devel

@@ -50,7 +50,7 @@ Biblioteki statyczne OpenSP.
 
 %prep
 %setup -q -n %{arname}-%{version}
-%patch -p1 
+%patch -p1
 
 %build
 #please don't run gettextize --copy --force

@@ -11,6 +11,7 @@ Source0:	http://dl.sourceforge.net/openjade/OpenSP-%{version}.tar.gz
 # Source0-md5:	f46fe0a04b76a4454ec27b7fcc84ec54
 Patch0:		%{name}-nolibnsl.patch
 Patch1:		%{name}-localedir.patch
+Patch2:		%{name}-gcc34.patch
 URL:		http://openjade.sourceforge.net/
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake
@@ -62,6 +63,7 @@ Biblioteki statyczne OpenSP.
 %setup -q -n %{arname}-%{version}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 #please don't run gettextize --copy --force

@@ -3,7 +3,7 @@ Summary(pl):	OpenSP -- parser SGML
 %define	arname	OpenSP
 Name:		opensp
 Version:	1.4
-Release:	10
+Release:	11
 License:	Copyright (c) 1999 The OpenJade group (free)
 Group:		Applications/Publishing/SGML
 Group(de):	Applikationen/Publizieren/SGML
@@ -11,11 +11,12 @@ Group(pl):	Aplikacje/Publikowanie/SGML
 Source0:	ftp://download.sourceforge.net/pub/sourceforge/openjade/%{arname}-%{version}.tar.gz
 Patch0:		OpenSP-DESTDIR.patch
 URL:		http://openjade.sourceforge.net/
-Provides:	sgmlparser
-Requires:	sgml-common >= 0.5-1
 Prereq:		/sbin/ldconfig
+Requires:	sgml-common >= 0.5-1
+Provides:	sgmlparser
 Provides:	sp
 BuildRequires:	gettext-devel
+BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Conflicts:	openjade <= 1.3-1
 Obsoletes:	sp
@@ -62,6 +63,7 @@ Biblioteki statyczne OpenSP.
 
 %build
 #please don't run gettextize --copy --force
+autoconf
 %configure \
 	--enable-default-catalog=%{_sysconfdir}/sgml/catalog \
 	--enable-default-search-path=%{_datadir}/sgml \

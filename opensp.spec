@@ -7,11 +7,12 @@ Release:	11
 License:	Copyright (c) 1999 The OpenJade group (free)
 Group:		Applications/Publishing/SGML
 Group(de):	Applikationen/Publizieren/SGML
+Group(es):	Aplicaciones/EditoraciСn/SGML
 Group(pl):	Aplikacje/Publikowanie/SGML
+Group(pt_BR):	AplicaГУes/EditoraГЦo/SGML
 Source0:	ftp://download.sourceforge.net/pub/sourceforge/openjade/%{arname}-%{version}.tar.gz
 Patch0:		OpenSP-DESTDIR.patch
 URL:		http://openjade.sourceforge.net/
-Prereq:		/sbin/ldconfig
 Requires:	sgml-common >= 0.5-1
 Provides:	sgmlparser
 Provides:	sp
@@ -32,14 +33,18 @@ Summary:	OpenSP header files
 Summary(pl):	Pliki nagЁСwkowe OpenSP
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
 OpenSP header files and devel documentation.
 
-%description -l pl devel
+%description devel -l pl
 Pliki nagЁСwkowe OpenSP.
 
 %package static
@@ -47,14 +52,18 @@ Summary:	Static OpenSP libraries
 Summary(pl):	Biblioteki statyczne OpenSP
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
 Static OpenSP libraries.
 
-%description -l pl static
+%description static -l pl
 Biblioteki statyczne OpenSP.
 
 %prep
@@ -95,14 +104,11 @@ gzip -9nf AUTHORS COPYING ChangeLog NEWS README TODO
 
 %find_lang sp
 
-%post   
-/sbin/ldconfig
-
-%postun 
-/sbin/ldconfig
-
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post	-p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files -f sp.lang
 %defattr(644,root,root,755)

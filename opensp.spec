@@ -7,7 +7,6 @@ Release:	1
 License:	Free (Copyright (C) 1999 The OpenJade group)
 Group:		Applications/Publishing/SGML
 Source0:	ftp://download.sourceforge.net/pub/sourceforge/openjade/%{arname}-%{version}.tar.gz
-#Patch0:		OpenSP-DESTDIR.patch
 URL:		http://openjade.sourceforge.net/
 Requires:	sgml-common >= 0.5-1
 Provides:	sgmlparser
@@ -50,7 +49,6 @@ Biblioteki statyczne OpenSP.
 
 %prep
 %setup -q -n %{arname}-%{version}
-#%patch -p1
 
 %build
 #please don't run gettextize --copy --force
@@ -62,7 +60,7 @@ Biblioteki statyczne OpenSP.
 	--enable-http
 
 %ifarch alpha
-%{__make} CXXFLAGS="%{!?debug:-O0}%{?debug:-O -g}"
+%{__make} CXXFLAGS="%{!?debug:-O0}%{?debug:-O0 -g}"
 %else
 %{__make}
 %endif

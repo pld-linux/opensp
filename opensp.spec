@@ -33,7 +33,7 @@ pakiet zawiera parser SGML.
 Summary:	OpenSP header files
 Summary(pl):	Pliki nag³ówkowe OpenSP
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 
 %description devel
 OpenSP header files and devel documentation.
@@ -45,7 +45,7 @@ Pliki nag³ówkowe OpenSP.
 Summary:	Static OpenSP libraries
 Summary(pl):	Biblioteki statyczne OpenSP
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{epoch}:%{version}
 
 %description static
 Static OpenSP libraries.

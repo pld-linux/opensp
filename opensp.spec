@@ -67,7 +67,7 @@ export LDFLAGS
 	--enable-default-catalog=%{_datadir}/sgml/CATALOG:%{_prefix}/local/share/sgml/CATALOG:%{_sysconfdir}/sgml.catalog \
 	--enable-default-search-path=%{_datadir}/sgml:%{_prefix}/local/share/sgml
 
-make  
+%{__make}  
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -76,7 +76,7 @@ install -d $RPM_BUILD_ROOT%{_datadir}/sgml/{catalogs,html,%{name}}
 ##install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/sgml/catalogs/html.cat
 
 
-make install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 #cp -a $RPM_BUILD_ROOT%{_datadir}/%{arname}/* $RPM_BUILD_ROOT%{_datadir}/sgml/html/
 

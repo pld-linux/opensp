@@ -4,7 +4,7 @@ Summary(pl):	OpenSP -- parser SGML
 Name:		opensp
 Version:	1.4
 Release:	12
-License:	Copyright (c) 1999 The OpenJade group (free)
+License:	Free (Copyright (c) 1999 The OpenJade group)
 Group:		Applications/Publishing/SGML
 Source0:	ftp://download.sourceforge.net/pub/sourceforge/openjade/%{arname}-%{version}.tar.gz
 Patch0:		OpenSP-DESTDIR.patch

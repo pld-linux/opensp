@@ -86,7 +86,10 @@ done
 # I don't want to have it in docs
 rm -f doc/Makefile*
 
+## what is this???
 ln -sf $RPM_BUILD_ROOT%{_bindir}/opensp
+
+
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
 
 gzip -9nf AUTHORS COPYING ChangeLog NEWS README TODO

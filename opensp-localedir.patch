@@ -1,0 +1,11 @@
+--- OpenSP-1.5/configure.in.orig	Mon Jun 30 15:24:24 2003
++++ OpenSP-1.5/configure.in	Mon Jun 30 15:26:01 2003
+@@ -233,7 +233,7 @@
+ 
+ AM_GNU_GETTEXT
+ AC_CHECK_HEADERS(locale.h)
+-AC_DEFINE_DIR(SP_LOCALE_DIR, datadir/locale, [location of message catalogs])
++AC_DEFINE_UNQUOTED(SP_LOCALE_DIR, "${prefix}/share/locale", [location of message catalogs])
+ SP_MESSAGE_DOMAIN=sp
+ AC_DEFINE_UNQUOTED(SP_MESSAGE_DOMAIN, "$SP_MESSAGE_DOMAIN", [message domain])
+ AC_SUBST(SP_MESSAGE_DOMAIN) 

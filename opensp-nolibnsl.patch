@@ -1,0 +1,11 @@
+--- OpenSP-1.5/configure.in.orig	Sun Nov 24 18:16:16 2002
++++ OpenSP-1.5/configure.in	Sun Mar  2 19:12:18 2003
+@@ -408,8 +408,6 @@
+         AC_MSG_RESULT(yes)
+ 	AC_DEFINE(SP_HAVE_SOCKET,1,
+                   [define this if sockets are available])
+-	AC_CHECK_LIB(nsl,main,LIBS="$LIBS -lnsl")
+-	AC_CHECK_LIB(socket,main,LIBS="$LIBS -lsocket")
+ 	AC_MSG_CHECKING(h_errno in netdb.h)
+ 	AC_EGREP_HEADER(h_errno,netdb.h,
+ 	    AC_MSG_RESULT(yes),

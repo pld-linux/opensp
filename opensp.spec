@@ -3,17 +3,20 @@ Summary(pl):	OpenSP -- parser SGML
 %define	arname	OpenSP
 Name:		opensp
 Version:	1.5
-Release:	1
+Release:	2
 Epoch:		1
 License:	Free (Copyright (C) 1999 The OpenJade group)
 Group:		Applications/Publishing/SGML
-Source0:	http://download.sourceforge.net/openjade/OpenSP-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/openjade/OpenSP-%{version}.tar.gz
+Patch0:		%{name}-nolibnsl.patch
 URL:		http://openjade.sourceforge.net/
+BuildRequires:	autoconf >= 2.53
+BuildRequires:	automake
+BuildRequires:	gettext-devel
+BuildRequires:	libtool >= 2:1.4d
 Requires:	sgml-common >= 0.5-1
 Provides:	sgmlparser
 Provides:	sp
-BuildRequires:	gettext-devel
-BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Conflicts:	openjade <= 1.3-1
 Obsoletes:	sp
@@ -50,13 +53,17 @@ Biblioteki statyczne OpenSP.
 
 %prep
 %setup -q -n %{arname}-%{version}
+%patch -p1
 
 %build
 #please don't run gettextize --copy --force
-#autoconf
 if [ ! -f po/LINGUAS ] ; then
 	ls po/*.po |sed 's=po/\(.*\).po=\1=' > po/LINGUAS
 fi
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__automake}
 %configure \
 	--enable-default-catalog=%{_sysconfdir}/sgml/catalog \
 	--enable-default-search-path=%{_datadir}/sgml \

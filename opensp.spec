@@ -1,14 +1,13 @@
-%define		snap	20020529
 Summary:	OpenSP -- SGML parser
 Summary(pl):	OpenSP -- parser SGML
 %define	arname	OpenSP
 Name:		opensp
-Version:	1.6
-Release:	0.%{snap}.1
+Version:	1.5
+Release:	1
+Epoch:		1
 License:	Free (Copyright (C) 1999 The OpenJade group)
 Group:		Applications/Publishing/SGML
-#Source0:	ftp://download.sourceforge.net/pub/sourceforge/openjade/%{arname}-%{version}.tar.gz
-Source0:	%{arname}-%{version}devel.%{snap}.tar.gz
+Source0:	http://download.sourceforge.net/openjade/OpenSP-%{version}.tar.gz
 URL:		http://openjade.sourceforge.net/
 Requires:	sgml-common >= 0.5-1
 Provides:	sgmlparser
@@ -50,11 +49,14 @@ Static OpenSP libraries.
 Biblioteki statyczne OpenSP.
 
 %prep
-%setup -q -n %{arname}-%{version}devel
+%setup -q -n %{arname}-%{version}
 
 %build
 #please don't run gettextize --copy --force
 #autoconf
+if [ ! -f po/LINGUAS ] ; then
+	ls po/*.po |sed 's=po/\(.*\).po=\1=' > po/LINGUAS
+fi
 %configure \
 	--enable-default-catalog=%{_sysconfdir}/sgml/catalog \
 	--enable-default-search-path=%{_datadir}/sgml \
@@ -66,7 +68,8 @@ Biblioteki statyczne OpenSP.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install DESTDIR=$RPM_BUILD_ROOT \
+	pkgdocdir=%{_defaultdocdir}/%{name}-%{version}
 
 for i in nsgmls sgmlnorm spam spcat spent; do
 	ln -sf o$i $RPM_BUILD_ROOT%{_bindir}/$i
@@ -74,10 +77,6 @@ done
 
 # sx conficts with sx from lrzsz package
 ln -sf osx $RPM_BUILD_ROOT%{_bindir}/sgml2xml
-
-# I don't want to have it in docs
-rm -f doc/Makefile*
-
 
 %find_lang sp
 
@@ -89,10 +88,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f sp.lang
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog NEWS README doc/*
+%{_defaultdocdir}/%{name}-%{version}
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 %{_datadir}/sgml/OpenSP
+%{_mandir}/man1/*
 
 %files devel
 %defattr(644,root,root,755)

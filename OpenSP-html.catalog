@@ -1,0 +1,64 @@
+-- html32.soc: catalog for parsing HTML 3.2 documents --
+PUBLIC "-//W3C//DTD HTML 3.2 Final//EN" html/HTML32.dtd
+PUBLIC "-//W3C//DTD HTML 3.2 Draft//EN" html/HTML32.dtd
+PUBLIC "-//W3C//DTD HTML 3.2//EN" html/HTML32.dtd
+-- added by klakier --
+DTDDECL "-//W3C//DTD HTML 3.2 Final//EN" html/HTML32.dcl
+DTDDECL "-//W3C//DTD HTML 3.2 Draft//EN" html/HTML32.dcl
+DTDDECL "-//W3C//DTD HTML 3.2//EN" html/HTML32.dcl
+
+PUBLIC "ISO 8879-1986//ENTITIES Added Latin 1//EN//HTML" html/ISOlat1.ent
+-- added by jjc --
+DOCTYPE html html/HTML32.dtd
+
+-- OVERRIDE YES --
+
+DOCTYPE HTML HTML4.dtd
+PUBLIC "-//W3C//DTD HTML 4.0//EN" html/HTML4-s.dtd
+PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" html/HTML4.dtd
+PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN" html/HTML4-f.dtd
+-- added by klakier --
+DTDDECL "-//W3C//DTD HTML 4.0//EN" html/HTML4.dcl
+DTDDECL "-//W3C//DTD HTML 4.0 Transitional//EN" html/HTML4.dcl
+DTDDECL "-//W3C//DTD HTML 4.0 Frameset//EN" html/HTML4.dcl
+
+
+PUBLIC "-//W3C//ENTITIES Latin1//EN//HTML" HTMLlat1.ent
+PUBLIC "-//W3C//ENTITIES Special//EN//HTML" HTMLspec.ent
+PUBLIC "-//W3C//ENTITIES Symbols//EN//HTML" HTMLsym.ent
+
+
+	-- catalog: SGML Open style entity catalog for HTML --
+	-- $Id$ --
+	-- Hacked by jjc --
+
+	-- Ways to refer to Level 2: most general to most specific --
+
+-- I was too lazy to associate DTDDECLs with following DTDs /klakier --
+PUBLIC	"-//IETF//DTD HTML//EN"			html.dtd
+PUBLIC	"-//IETF//DTD HTML 2.0//EN"		html.dtd
+PUBLIC	"-//IETF//DTD HTML Level 2//EN"		html.dtd
+PUBLIC	"-//IETF//DTD HTML 2.0 Level 2//EN"	html.dtd
+
+	-- Ways to refer to Level 1: most general to most specific --
+PUBLIC	"-//IETF//DTD HTML Level 1//EN"		html-1.dtd
+PUBLIC	"-//IETF//DTD HTML 2.0 Level 1//EN"	html-1.dtd
+
+	-- Ways to refer to
+		 Strict Level 2: most general to most specific --
+PUBLIC	"-//IETF//DTD HTML Strict//EN"			html-s.dtd
+PUBLIC	"-//IETF//DTD HTML 2.0 Strict//EN"		html-s.dtd
+PUBLIC	"-//IETF//DTD HTML Strict Level 2//EN"		html-s.dtd
+PUBLIC	"-//IETF//DTD HTML 2.0 Strict Level 2//EN"	html-s.dtd
+
+	-- Ways to refer to
+		 Strict Level 1: most general to most specific --
+PUBLIC	"-//IETF//DTD HTML Strict Level 1//EN"		html-1s.dtd
+PUBLIC	"-//IETF//DTD HTML 2.0 Strict Level 1//EN"	html-1s.dtd
+
+	-- ISO latin 1 entity set for HTML -- 
+PUBLIC	"ISO 8879-1986//ENTITIES Added Latin 1//EN//HTML"	ISOlat1.sgm
+
+SGMLDECL html.dcl
+-- DOCTYPE html html.dtd --
+-- SGMLDECL "xml.dcl" --

@@ -3,9 +3,10 @@ Summary(pl):	OpenSP -- parser SGML
 %define	arname	OpenSP
 Name:		opensp
 Version:	1.4
-Release:	6
-Copyright:	Copyright (c) 1999 The OpenJade group (free)
+Release:	7
+LIcense:	Copyright (c) 1999 The OpenJade group (free)
 Group:		Applications/Publishing/SGML
+Group(de):	Applikationen/Publizieren/SGML
 Group(pl):	Aplikacje/Publikowanie/SGML
 Source0:	ftp://download.sourceforge.net/pub/sourceforge/openjade/%{arname}-%{version}.tar.gz
 #Source1:	%{arname}-html.catalog
@@ -31,6 +32,7 @@ pakiet zawiera parser SGML.
 Summary:	OpenSP header files
 Summary(pl):	Pliki nag³ówkowe OpenSP
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
@@ -45,6 +47,7 @@ Pliki nag³ówkowe OpenSP.
 Summary:	Static OpenSP libraries
 Summary(pl):	Biblioteki statyczne OpenSP
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
@@ -61,14 +64,12 @@ Biblioteki statyczne OpenSP.
 
 %build
 #please don't run gettextize --copy --force
-LDFLAGS="-s"
-export LDFLAGS
 %configure \
 	--enable-default-catalog=%{_datadir}/sgml/CATALOG:%{_prefix}/local/share/sgml/CATALOG:%{_sysconfdir}/sgml.catalog \
 	--enable-default-search-path=%{_datadir}/sgml:%{_prefix}/local/share/sgml
 
 %ifarch alpha
-%{__make} CXXFLAGS="-O0"
+%{__make} CXXFLAGS="%{!?debug:-O0}%{!?debug:-O -g}"
 %else
 %{__make}
 %endif
@@ -95,27 +96,24 @@ rm -f doc/Makefile*
 ## what is this???
 ln -sf $RPM_BUILD_ROOT%{_bindir}/opensp
 
-
-strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
-
 gzip -9nf AUTHORS COPYING ChangeLog NEWS README TODO
 
 %find_lang sp
 
 %post   
 /sbin/ldconfig
-/usr/sbin/fix-sgml-catalog
+%attr(755,root,root) %{_sbindir}/fix-sgml-catalog
 
 %postun 
 /sbin/ldconfig
-/usr/sbin/fix-sgml-catalog
+%attr(755,root,root) %{_sbindir}/fix-sgml-catalog
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files -f sp.lang
 %defattr(644,root,root,755)
-%doc doc AUTHORS.gz COPYING.gz ChangeLog.gz NEWS.gz README.gz TODO.gz
+%doc doc *.gz
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 ##%{_datadir}/sgml/html

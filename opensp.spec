@@ -6,7 +6,7 @@ Release: 	1
 Summary(pl):	OpenSP  -- parser SGML
 Provides:	sgmlparser
 Prereq:		%{_sbindir}/fix-sgml-catalog
-Requires: 	sgml-common
+Requires: 	sgml-common <= 0.2-4
 Conflicts:	openjade <= 1.3-1
 URL: 		http://openjade.sourceforge.net/
 Source:		http://download.sourceforge.net/openjade/%{arname}-%{version}.tar.gz

@@ -10,6 +10,7 @@ Group:		Applications/Publishing/SGML
 Source0:	http://dl.sourceforge.net/openjade/OpenSP-%{version}.tar.gz
 # Source0-md5: 87f56e79ae0c20397f4207d61d154303
 Patch0:		%{name}-nolibnsl.patch
+Patch1:		%{name}-gcc33.patch
 URL:		http://openjade.sourceforge.net/
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake

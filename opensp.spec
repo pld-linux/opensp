@@ -8,7 +8,7 @@ Copyright:	Copyright (c) 1999 The OpenJade group (free)
 Group:		Applications/Publishing/SGML
 Group(pl):	Aplikacje/Publikowanie/SGML
 Source0:	http://download.sourceforge.net/openjade/%{arname}-%{version}.tar.gz
-Source1:	%{arname}-html.catalog
+#Source1:	%{arname}-html.catalog
 Patch0:		OpenSP-DESTDIR.patch
 URL:		http://openjade.sourceforge.net/
 Provides:	sgmlparser
@@ -73,11 +73,12 @@ make
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_datadir}/sgml/{catalogs,html,%{name}}
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/sgml/catalogs/html.cat
+##install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/sgml/catalogs/html.cat
+
 
 make install DESTDIR=$RPM_BUILD_ROOT
 
-cp -a $RPM_BUILD_ROOT%{_datadir}/%{arname}/* $RPM_BUILD_ROOT%{_datadir}/sgml/html/
+#cp -a $RPM_BUILD_ROOT%{_datadir}/%{arname}/* $RPM_BUILD_ROOT%{_datadir}/sgml/html/
 
 for i in nsgmls sgmlnorm spam spcat spent sx; do
 	ln -sf o$i $RPM_BUILD_ROOT%{_bindir}/$i
@@ -112,8 +113,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc doc AUTHORS.gz COPYING.gz ChangeLog.gz NEWS.gz README.gz TODO.gz
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
-%{_datadir}/sgml/html
-%{_datadir}/sgml/catalogs/*
+##%{_datadir}/sgml/html
+##%{_datadir}/sgml/catalogs/*
 
 %files devel
 %defattr(644,root,root,755)

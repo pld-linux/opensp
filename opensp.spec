@@ -9,6 +9,7 @@ Group:		Applications/Publishing/SGML
 Group(pl):	Aplikacje/Publikowanie/SGML
 Source0:	http://download.sourceforge.net/openjade/%{arname}-%{version}.tar.gz
 Source1:	%{arname}-html.catalog
+Patch0:		OpenSP-DESTDIR.patch
 URL:		http://openjade.sourceforge.net/
 Provides:	sgmlparser
 Requires:	sgml-common <= 0.2-4
@@ -56,9 +57,10 @@ Biblioteki statyczne OpenSP.
 
 %prep
 %setup -q -n %{arname}-%{version}
+%patch -p1 
 
 %build
-gettextize --copy --force
+#please don't run gettextize --copy --force
 LDFLAGS="-s"
 export LDFLAGS
 %configure \
@@ -78,7 +80,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 cp -a $RPM_BUILD_ROOT%{_datadir}/%{arname}/* $RPM_BUILD_ROOT%{_datadir}/sgml/html/
 
 for i in nsgmls sgmlnorm spam spcat spent sx; do
-	ln -sf $i $RPM_BUILD_ROOT%{_bibdir}/o$i
+	ln -sf $i $RPM_BUILD_ROOT%{_bindir}/o$i
 done
 
 # I don't want to have it in docs

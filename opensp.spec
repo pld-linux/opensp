@@ -3,18 +3,16 @@ Summary(pl):	OpenSP -- parser SGML
 %define	arname	OpenSP
 Name:		opensp
 Version:	1.4
-Release:	8
+Release:	1
 License:	Copyright (c) 1999 The OpenJade group (free)
 Group:		Applications/Publishing/SGML
 Group(de):	Applikationen/Publizieren/SGML
 Group(pl):	Aplikacje/Publikowanie/SGML
 Source0:	ftp://download.sourceforge.net/pub/sourceforge/openjade/%{arname}-%{version}.tar.gz
-#Source1:	%{arname}-html.catalog
 Patch0:		OpenSP-DESTDIR.patch
 URL:		http://openjade.sourceforge.net/
 Provides:	sgmlparser
-Requires:	sgml-common >= 0.2-4
-Prereq:		%{_sbindir}/fix-sgml-catalog
+Requires:	sgml-common >= 0.5-1
 Prereq:		/sbin/ldconfig
 Provides:	sp
 BuildRequires:	gettext-devel
@@ -65,8 +63,9 @@ Biblioteki statyczne OpenSP.
 %build
 #please don't run gettextize --copy --force
 %configure \
-	--enable-default-catalog=%{_datadir}/sgml/CATALOG:%{_prefix}/local/share/sgml/CATALOG:%{_sysconfdir}/sgml.catalog \
-	--enable-default-search-path=%{_datadir}/sgml:%{_prefix}/local/share/sgml
+	--enable-default-catalog=%{_sysconfdir}/sgml/catalog \
+	--enable-default-search-path=%{_datadir}/sgml \
+	--datadir=%{_datadir}/sgml
 
 %ifarch alpha
 %{__make} CXXFLAGS="%{!?debug:-O0}%{?debug:-O -g}"
@@ -76,25 +75,18 @@ Biblioteki statyczne OpenSP.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_datadir}/sgml/{catalogs,html,%{name}}
-
-##install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/sgml/catalogs/html.cat
-
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-#cp -a $RPM_BUILD_ROOT%{_datadir}/%{arname}/* $RPM_BUILD_ROOT%{_datadir}/sgml/html/
-
-# I removed sx from this list because it conficts with lrzsz package /klakier
 for i in nsgmls sgmlnorm spam spcat spent; do
 	ln -sf o$i $RPM_BUILD_ROOT%{_bindir}/$i
 done
 
+# sx conficts with sx from lrzsz package
+ln -sf osx $RPM_BUILD_ROOT%{_bindir}/sgml2xml
+
 # I don't want to have it in docs
 rm -f doc/Makefile*
-
-## what is this???
-ln -sf $RPM_BUILD_ROOT%{_bindir}/opensp
 
 gzip -9nf AUTHORS COPYING ChangeLog NEWS README TODO
 
@@ -102,11 +94,9 @@ gzip -9nf AUTHORS COPYING ChangeLog NEWS README TODO
 
 %post   
 /sbin/ldconfig
-/usr/sbin/fix-sgml-catalog
 
 %postun 
 /sbin/ldconfig
-/usr/sbin/fix-sgml-catalog
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -116,8 +106,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc doc *.gz
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
-##%{_datadir}/sgml/html
-##%{_datadir}/sgml/catalogs/*
 
 %files devel
 %defattr(644,root,root,755)

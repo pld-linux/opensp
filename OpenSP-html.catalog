@@ -59,6 +59,6 @@ PUBLIC	"-//IETF//DTD HTML 2.0 Strict Level 1//EN"	html-1s.dtd
 	-- ISO latin 1 entity set for HTML -- 
 PUBLIC	"ISO 8879-1986//ENTITIES Added Latin 1//EN//HTML"	ISOlat1.sgm
 
-SGMLDECL html.dcl
+-- SGMLDECL html.dcl --
 -- DOCTYPE html html.dtd --
 -- SGMLDECL "xml.dcl" --

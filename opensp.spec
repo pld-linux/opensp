@@ -7,7 +7,7 @@ Release:	5
 Copyright:	Copyright (c) 1999 The OpenJade group (free)
 Group:		Applications/Publishing/SGML
 Group(pl):	Aplikacje/Publikowanie/SGML
-Source0:	http://download.sourceforge.net/openjade/%{arname}-%{version}.tar.gz
+Source0:	ftp://download.sourceforge.net/pub/sourceforge/openjade/%{arname}-%{version}.tar.gz
 #Source1:	%{arname}-html.catalog
 Patch0:		OpenSP-DESTDIR.patch
 URL:		http://openjade.sourceforge.net/

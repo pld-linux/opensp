@@ -3,7 +3,7 @@ Summary(pl):	OpenSP -- parser SGML
 %define	arname	OpenSP
 Name:		opensp
 Version:	1.4
-Release:	9
+Release:	10
 License:	Copyright (c) 1999 The OpenJade group (free)
 Group:		Applications/Publishing/SGML
 Group(de):	Applikationen/Publizieren/SGML
@@ -65,7 +65,8 @@ Biblioteki statyczne OpenSP.
 %configure \
 	--enable-default-catalog=%{_sysconfdir}/sgml/catalog \
 	--enable-default-search-path=%{_datadir}/sgml \
-	--datadir=%{_datadir}/sgml
+	--datadir=%{_datadir}/sgml \
+	--enable-http
 
 %ifarch alpha
 %{__make} CXXFLAGS="%{!?debug:-O0}%{?debug:-O -g}"

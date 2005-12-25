@@ -1,29 +1,28 @@
 Summary:	OpenSP - SGML parser
 Summary(pl):	OpenSP - parser SGML
-%define	arname	OpenSP
 Name:		opensp
-Version:	1.5.1
-Release:	4
+Version:	1.5.2
+Release:	1
 Epoch:		2
 License:	Free (Copyright (C) 1999 The OpenJade group)
 Group:		Applications/Publishing/SGML
 Source0:	http://dl.sourceforge.net/openjade/OpenSP-%{version}.tar.gz
-# Source0-md5:	f46fe0a04b76a4454ec27b7fcc84ec54
+# Source0-md5:	670b223c5d12cee40c9137be86b6c39b
 Patch0:		%{name}-nolibnsl.patch
 Patch1:		%{name}-localedir.patch
-Patch2:		%{name}-gcc34.patch
 URL:		http://openjade.sourceforge.net/
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-devel >= 0.14.4
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.4d
+BuildRequires:	xmlto
 Requires:	sgml-common >= 0.5-1
 Provides:	sgmlparser
 Provides:	sp
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Conflicts:	openjade <= 1.3-1
 Obsoletes:	sp
+Conflicts:	openjade <= 1.3-1
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		sgmldir		/usr/share/sgml
 %define		_datadir	%{sgmldir}
@@ -60,16 +59,12 @@ Static OpenSP libraries.
 Biblioteki statyczne OpenSP.
 
 %prep
-%setup -q -n %{arname}-%{version}
+%setup -q -n OpenSP-%{version}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
-#please don't run gettextize --copy --force
-if [ ! -f po/LINGUAS ] ; then
-	ls po/*.po |sed 's=po/\(.*\).po=\1=' > po/LINGUAS
-fi
+# don't run gettextize (PACKAGE changed to @SP_MESSAGE_DOMAIN@ in po/Makefile.in.in)
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
@@ -86,6 +81,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
+	localedir=%{_prefix}/share/locale \
 	pkgdocdir=%{_defaultdocdir}/%{name}-%{version}
 
 for i in nsgmls sgmlnorm spam spcat spent; do
@@ -95,7 +91,7 @@ done
 # sx conficts with sx from lrzsz package
 ln -sf osx $RPM_BUILD_ROOT%{_bindir}/sgml2xml
 
-%find_lang sp4
+%find_lang sp5
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -103,7 +99,7 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-%files -f sp4.lang
+%files -f sp5.lang
 %defattr(644,root,root,755)
 %{_defaultdocdir}/%{name}-%{version}
 %attr(755,root,root) %{_bindir}/*

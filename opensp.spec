@@ -82,7 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	localedir=%{_prefix}/share/locale \
-	pkgdocdir=%{_defaultdocdir}/%{name}-%{version}
+	pkgdocdir=%{_docdir}/%{name}-%{version}
 
 for i in nsgmls sgmlnorm spam spcat spent; do
 	ln -sf o$i $RPM_BUILD_ROOT%{_bindir}/$i
@@ -101,10 +101,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f sp5.lang
 %defattr(644,root,root,755)
-%{_defaultdocdir}/%{name}-%{version}
+%{_docdir}/%{name}-%{version}
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
-%{sgmldir}/OpenSP
+%{_datadir}/OpenSP
 %{_mandir}/man1/*
 
 %files devel

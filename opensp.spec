@@ -1,5 +1,5 @@
 Summary:	OpenSP - SGML parser
-Summary(pl):	OpenSP - parser SGML
+Summary(pl.UTF-8):   OpenSP - parser SGML
 Name:		opensp
 Version:	1.5.2
 Release:	1
@@ -30,12 +30,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Package contains an SGML parser.
 
-%description -l pl
+%description -l pl.UTF-8
 Pakiet zawiera parser SGML.
 
 %package devel
 Summary:	OpenSP header files
-Summary(pl):	Pliki nag≥Ûwkowe OpenSP
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe OpenSP
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}
 Requires:	libstdc++-devel
@@ -43,19 +43,19 @@ Requires:	libstdc++-devel
 %description devel
 OpenSP header files and devel documentation.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe OpenSP.
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe OpenSP.
 
 %package static
 Summary:	Static OpenSP libraries
-Summary(pl):	Biblioteki statyczne OpenSP
+Summary(pl.UTF-8):   Biblioteki statyczne OpenSP
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}
 
 %description static
 Static OpenSP libraries.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteki statyczne OpenSP.
 
 %prep

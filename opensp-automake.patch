@@ -1,0 +1,11 @@
+--- OpenSP-1.5.2/configure.in~	2007-02-18 09:24:54.000000000 +0100
++++ OpenSP-1.5.2/configure.in	2007-02-18 09:25:45.000000000 +0100
+@@ -238,6 +238,8 @@
+ dnl Checks for libraries.
+ AC_CHECK_LIB(pthread,pthread_create,,AC_CHECK_LIB(threads,cthread_fork))
+ 
++MKINSTALLDIRS="\$(top_srcdir)/mkinstalldirs"
++AC_SUBST(MKINSTALLDIRS)
+ AM_GNU_GETTEXT
+ AM_GNU_GETTEXT_VERSION([0.14.5])
+ AC_CHECK_HEADERS(locale.h)

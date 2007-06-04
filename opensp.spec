@@ -2,7 +2,7 @@ Summary:	OpenSP - SGML parser
 Summary(pl.UTF-8):	OpenSP - parser SGML
 Name:		opensp
 Version:	1.5.2
-Release:	2
+Release:	3
 Epoch:		2
 License:	Free (Copyright (C) 1999 The OpenJade group)
 Group:		Applications/Publishing/SGML
@@ -85,6 +85,22 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	localedir=%{_prefix}/share/locale \
 	pkgdocdir=%{_docdir}/%{name}-%{version}
+
+# tidy@mozilla-firefox
+install -d $RPM_BUILD_ROOT%{_includedir}/OpenSP/nsgmls
+install nsgmls/NsgmlsMessages.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/nsgmls
+install -d $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+install lib/Parser.h $RPM_BUILD_ROOT$RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+install lib/ParserState.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+install lib/Undo.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+install lib/EventQueue.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+install lib/Id.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+install lib/OutputState.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+install lib/Recognizer.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+install lib/LpdEntityRef.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+install lib/events.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+install lib/Trie.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+install lib/Priority.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
 
 for i in nsgmls sgmlnorm spam spcat spent; do
 	ln -sf o$i $RPM_BUILD_ROOT%{_bindir}/$i

@@ -2,7 +2,7 @@ Summary:	OpenSP - SGML parser
 Summary(pl.UTF-8):	OpenSP - parser SGML
 Name:		opensp
 Version:	1.5.2
-Release:	3
+Release:	4
 Epoch:		2
 License:	Free (Copyright (C) 1999 The OpenJade group)
 Group:		Applications/Publishing/SGML
@@ -90,7 +90,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_includedir}/OpenSP/nsgmls
 install nsgmls/NsgmlsMessages.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/nsgmls
 install -d $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
-install lib/Parser.h $RPM_BUILD_ROOT$RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+install lib/Parser.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
 install lib/ParserState.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
 install lib/Undo.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
 install lib/EventQueue.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib

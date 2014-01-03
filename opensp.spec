@@ -122,7 +122,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/%{name}-%{version}
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
-%attr(755,root,root) %ghost %{_libdir}/lib*.so.?
+%attr(755,root,root) %ghost %{_libdir}/lib*.so.5
 %{_datadir}/OpenSP
 %{_mandir}/man1/*
 

@@ -2,7 +2,7 @@ Summary:	OpenSP - SGML parser
 Summary(pl.UTF-8):	OpenSP - parser SGML
 Name:		opensp
 Version:	1.5.2
-Release:	5
+Release:	6
 Epoch:		2
 License:	Free (Copyright (C) 1999 The OpenJade group)
 Group:		Applications/Publishing/SGML
@@ -122,6 +122,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/%{name}-%{version}
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %ghost %{_libdir}/lib*.so.?
 %{_datadir}/OpenSP
 %{_mandir}/man1/*
 

@@ -6,7 +6,7 @@ Release:	6
 Epoch:		2
 License:	Free (Copyright (C) 1999 The OpenJade group)
 Group:		Applications/Publishing/SGML
-Source0:	http://dl.sourceforge.net/openjade/OpenSP-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/openjade/OpenSP-%{version}.tar.gz
 # Source0-md5:	670b223c5d12cee40c9137be86b6c39b
 Patch0:		%{name}-nolibnsl.patch
 Patch1:		%{name}-localedir.patch
@@ -29,10 +29,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_datadir	%{sgmldir}
 
 %description
-Package contains an SGML parser.
+This package contains an SGML parser.
 
 %description -l pl.UTF-8
-Pakiet zawiera parser SGML.
+Ten pakiet zawiera parser SGML.
 
 %package devel
 Summary:	OpenSP header files
@@ -120,18 +120,34 @@ rm -rf $RPM_BUILD_ROOT
 %files -f sp5.lang
 %defattr(644,root,root,755)
 %{_docdir}/%{name}-%{version}
-%attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
-%attr(755,root,root) %ghost %{_libdir}/lib*.so.5
+%attr(755,root,root) %{_bindir}/nsgmls
+%attr(755,root,root) %{_bindir}/onsgmls
+%attr(755,root,root) %{_bindir}/osgmlnorm
+%attr(755,root,root) %{_bindir}/ospam
+%attr(755,root,root) %{_bindir}/ospcat
+%attr(755,root,root) %{_bindir}/ospent
+%attr(755,root,root) %{_bindir}/osx
+%attr(755,root,root) %{_bindir}/sgml2xml
+%attr(755,root,root) %{_bindir}/sgmlnorm
+%attr(755,root,root) %{_bindir}/spam
+%attr(755,root,root) %{_bindir}/spcat
+%attr(755,root,root) %{_bindir}/spent
+%attr(755,root,root) %{_libdir}/libosp.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libosp.so.5
 %{_datadir}/OpenSP
-%{_mandir}/man1/*
+%{_mandir}/man1/onsgmls.1*
+%{_mandir}/man1/osgmlnorm.1*
+%{_mandir}/man1/ospam.1*
+%{_mandir}/man1/ospcat.1*
+%{_mandir}/man1/ospent.1*
+%{_mandir}/man1/osx.1*
 
 %files devel
 %defattr(644,root,root,755)
 %{_includedir}/OpenSP
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
+%attr(755,root,root) %{_libdir}/libosp.so
+%{_libdir}/libosp.la
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libosp.a

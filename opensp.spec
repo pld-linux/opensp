@@ -14,7 +14,7 @@ Patch2:		%{name}-automake.patch
 URL:		http://openjade.sourceforge.net/
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake
-BuildRequires:	gettext-devel >= 0.14.4
+BuildRequires:	gettext-tools >= 0.14.4
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.4d
 BuildRequires:	xmlto

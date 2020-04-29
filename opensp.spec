@@ -12,8 +12,6 @@ Patch0:		%{name}-nolibnsl.patch
 Patch1:		%{name}-localedir.patch
 Patch2:		%{name}-automake.patch
 URL:		http://openjade.sourceforge.net/
-BuildRequires:	autoconf >= 2.53
-BuildRequires:	automake
 BuildRequires:	gettext-tools >= 0.14.4
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.4d
@@ -66,11 +64,7 @@ Biblioteki statyczne OpenSP.
 %patch2 -p1
 
 %build
-# don't run gettextize (PACKAGE changed to @SP_MESSAGE_DOMAIN@ in po/Makefile.in.in)
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__automake}
+cp -f /usr/share/automake/config.sub .
 %configure \
 	--enable-default-catalog=%{_sysconfdir}/sgml/catalog \
 	--enable-default-search-path=%{sgmldir} \

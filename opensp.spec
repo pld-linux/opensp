@@ -12,6 +12,7 @@ Patch0:		%{name}-nolibnsl.patch
 Patch1:		%{name}-localedir.patch
 Patch2:		%{name}-automake.patch
 URL:		http://openjade.sourceforge.net/
+BuildRequires:	automake
 BuildRequires:	gettext-tools >= 0.14.4
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.4d

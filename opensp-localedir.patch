@@ -1,8 +1,9 @@
---- OpenSP-1.5.1/configure.in.orig	2003-10-22 22:23:52.639805072 +0200
-+++ OpenSP-1.5.1/configure.in	2003-10-22 22:26:22.293054320 +0200
-@@ -242,7 +242,7 @@
- ALL_LINGUAS="de fr ja sv"
+diff -urNp -x '*.orig' OpenSP-1.5.2.org/configure.in OpenSP-1.5.2/configure.in
+--- OpenSP-1.5.2.org/configure.in	2023-12-03 23:23:38.606960871 +0100
++++ OpenSP-1.5.2/configure.in	2023-12-03 23:23:38.684961806 +0100
+@@ -241,7 +241,7 @@ AC_CHECK_LIB(pthread,pthread_create,,AC_
  AM_GNU_GETTEXT
+ AM_GNU_GETTEXT_VERSION([0.14.5])
  AC_CHECK_HEADERS(locale.h)
 -AC_DEFINE_DIR(SP_LOCALE_DIR, datadir/locale, [location of message catalogs])
 +AC_DEFINE_UNQUOTED(SP_LOCALE_DIR, "${prefix}/share/locale", [location of message catalogs])

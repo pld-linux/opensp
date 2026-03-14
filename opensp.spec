@@ -2,7 +2,7 @@ Summary:	OpenSP - SGML parser
 Summary(pl.UTF-8):	OpenSP - parser SGML
 Name:		opensp
 Version:	1.5.2
-Release:	7
+Release:	8
 Epoch:		2
 License:	Free (Copyright (C) 1999 The OpenJade group)
 Group:		Applications/Publishing/SGML
@@ -12,7 +12,9 @@ Patch0:		%{name}-nolibnsl.patch
 Patch1:		%{name}-localedir.patch
 Patch2:		%{name}-automake.patch
 URL:		http://openjade.sourceforge.net/
+BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	gettext-autopoint
 BuildRequires:	gettext-tools >= 0.14.4
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.4d
@@ -20,7 +22,7 @@ BuildRequires:	xmlto
 Requires:	sgml-common >= 0.5-1
 Provides:	sgmlparser
 Provides:	sp
-Obsoletes:	sp
+Obsoletes:	sp < %{epoch}:%{version}-%{release}
 Conflicts:	openjade <= 1.3-1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -65,6 +67,12 @@ Biblioteki statyczne OpenSP.
 %patch -P2 -p1
 
 %build
+%{__autopoint}
+%{__libtoolize}
+%{__aclocal} -I m4
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 cp -f /usr/share/automake/config.sub .
 %configure \
 	--enable-default-catalog=%{_sysconfdir}/sgml/catalog \
@@ -104,7 +112,7 @@ done
 # sx conficts with sx from lrzsz package
 ln -sf osx $RPM_BUILD_ROOT%{_bindir}/sgml2xml
 
-%find_lang sp5
+%find_lang OpenSP
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -112,7 +120,7 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-%files -f sp5.lang
+%files -f OpenSP.lang
 %defattr(644,root,root,755)
 %{_docdir}/%{name}-%{version}
 %attr(755,root,root) %{_bindir}/nsgmls

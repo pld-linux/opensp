@@ -4,18 +4,18 @@ Name:		opensp
 Version:	1.5.2
 Release:	8
 Epoch:		2
-License:	Free (Copyright (C) 1999 The OpenJade group)
+License:	MIT-like
 Group:		Applications/Publishing/SGML
 Source0:	https://downloads.sourceforge.net/openjade/OpenSP-%{version}.tar.gz
 # Source0-md5:	670b223c5d12cee40c9137be86b6c39b
 Patch0:		%{name}-nolibnsl.patch
 Patch1:		%{name}-localedir.patch
 Patch2:		%{name}-automake.patch
+Patch3:		%{name}-gettext.patch
 URL:		https://openjade.sourceforge.net/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake
-BuildRequires:	gettext-autopoint
-BuildRequires:	gettext-tools >= 0.14.4
+BuildRequires:	gettext-tools >= 0.14.5
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.4d
 BuildRequires:	xmlto
@@ -65,15 +65,15 @@ Biblioteki statyczne OpenSP.
 %patch -P0 -p1
 %patch -P1 -p1
 %patch -P2 -p1
+%patch -P3 -p1
 
 %build
-%{__autopoint}
+%{__gettextize}
 %{__libtoolize}
 %{__aclocal} -I m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-cp -f /usr/share/automake/config.sub .
 %configure \
 	--enable-default-catalog=%{_sysconfdir}/sgml/catalog \
 	--enable-default-search-path=%{sgmldir} \
@@ -91,19 +91,19 @@ rm -rf $RPM_BUILD_ROOT
 
 # tidy@mozilla-firefox
 install -d $RPM_BUILD_ROOT%{_includedir}/OpenSP/nsgmls
-install nsgmls/NsgmlsMessages.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/nsgmls
+cp -p nsgmls/NsgmlsMessages.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/nsgmls
 install -d $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
-install lib/Parser.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
-install lib/ParserState.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
-install lib/Undo.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
-install lib/EventQueue.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
-install lib/Id.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
-install lib/OutputState.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
-install lib/Recognizer.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
-install lib/LpdEntityRef.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
-install lib/events.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
-install lib/Trie.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
-install lib/Priority.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+cp -p lib/Parser.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+cp -p lib/ParserState.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+cp -p lib/Undo.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+cp -p lib/EventQueue.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+cp -p lib/Id.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+cp -p lib/OutputState.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+cp -p lib/Recognizer.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+cp -p lib/LpdEntityRef.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+cp -p lib/events.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+cp -p lib/Trie.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
+cp -p lib/Priority.h $RPM_BUILD_ROOT%{_includedir}/OpenSP/lib
 
 for i in nsgmls sgmlnorm spam spcat spent; do
 	ln -sf o$i $RPM_BUILD_ROOT%{_bindir}/$i
@@ -112,7 +112,10 @@ done
 # sx conficts with sx from lrzsz package
 ln -sf osx $RPM_BUILD_ROOT%{_bindir}/sgml2xml
 
-%find_lang OpenSP
+# generic file
+%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/ABOUT-NLS
+
+%find_lang sp5
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -120,7 +123,7 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-%files -f OpenSP.lang
+%files -f sp5.lang
 %defattr(644,root,root,755)
 %{_docdir}/%{name}-%{version}
 %attr(755,root,root) %{_bindir}/onsgmls

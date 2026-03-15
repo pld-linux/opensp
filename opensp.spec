@@ -123,20 +123,21 @@ rm -rf $RPM_BUILD_ROOT
 %files -f OpenSP.lang
 %defattr(644,root,root,755)
 %{_docdir}/%{name}-%{version}
-%attr(755,root,root) %{_bindir}/nsgmls
 %attr(755,root,root) %{_bindir}/onsgmls
 %attr(755,root,root) %{_bindir}/osgmlnorm
 %attr(755,root,root) %{_bindir}/ospam
 %attr(755,root,root) %{_bindir}/ospcat
 %attr(755,root,root) %{_bindir}/ospent
 %attr(755,root,root) %{_bindir}/osx
-%attr(755,root,root) %{_bindir}/sgml2xml
-%attr(755,root,root) %{_bindir}/sgmlnorm
-%attr(755,root,root) %{_bindir}/spam
-%attr(755,root,root) %{_bindir}/spcat
-%attr(755,root,root) %{_bindir}/spent
-%attr(755,root,root) %{_libdir}/libosp.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libosp.so.5
+# symlinks
+%{_bindir}/nsgmls
+%{_bindir}/sgml2xml
+%{_bindir}/sgmlnorm
+%{_bindir}/spam
+%{_bindir}/spcat
+%{_bindir}/spent
+%{_libdir}/libosp.so.*.*.*
+%ghost %{_libdir}/libosp.so.5
 %{_datadir}/OpenSP
 %{_mandir}/man1/onsgmls.1*
 %{_mandir}/man1/osgmlnorm.1*
@@ -147,9 +148,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/OpenSP
-%attr(755,root,root) %{_libdir}/libosp.so
+%{_libdir}/libosp.so
 %{_libdir}/libosp.la
+%{_includedir}/OpenSP
 
 %files static
 %defattr(644,root,root,755)

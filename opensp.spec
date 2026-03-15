@@ -6,12 +6,12 @@ Release:	8
 Epoch:		2
 License:	Free (Copyright (C) 1999 The OpenJade group)
 Group:		Applications/Publishing/SGML
-Source0:	http://downloads.sourceforge.net/openjade/OpenSP-%{version}.tar.gz
+Source0:	https://downloads.sourceforge.net/openjade/OpenSP-%{version}.tar.gz
 # Source0-md5:	670b223c5d12cee40c9137be86b6c39b
 Patch0:		%{name}-nolibnsl.patch
 Patch1:		%{name}-localedir.patch
 Patch2:		%{name}-automake.patch
-URL:		http://openjade.sourceforge.net/
+URL:		https://openjade.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-autopoint
@@ -21,8 +21,8 @@ BuildRequires:	libtool >= 2:1.4d
 BuildRequires:	xmlto
 Requires:	sgml-common >= 0.5-1
 Provides:	sgmlparser
-Provides:	sp
-Obsoletes:	sp < %{epoch}:%{version}-%{release}
+Provides:	sp = %{version}
+Obsoletes:	sp < 1.4
 Conflicts:	openjade <= 1.3-1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 

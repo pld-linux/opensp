@@ -2,7 +2,7 @@ Summary:	OpenSP - SGML parser
 Summary(pl.UTF-8):	OpenSP - parser SGML
 Name:		opensp
 Version:	1.5.2
-Release:	8
+Release:	9
 Epoch:		2
 License:	MIT-like
 Group:		Applications/Publishing/SGML

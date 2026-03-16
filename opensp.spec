@@ -2,7 +2,7 @@ Summary:	OpenSP - SGML parser
 Summary(pl.UTF-8):	OpenSP - parser SGML
 Name:		opensp
 Version:	1.5.2
-Release:	9
+Release:	10
 Epoch:		2
 License:	MIT-like
 Group:		Applications/Publishing/SGML
@@ -28,6 +28,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		sgmldir		/usr/share/sgml
 %define		_datadir	%{sgmldir}
+%define		_docdir		/usr/share/doc
 
 %description
 This package contains an SGML parser.

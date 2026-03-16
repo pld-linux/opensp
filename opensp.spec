@@ -26,9 +26,7 @@ Obsoletes:	sp < 1.4
 Conflicts:	openjade <= 1.3-1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		sgmldir		/usr/share/sgml
-%define		_datadir	%{sgmldir}
-%define		_docdir		/usr/share/doc
+%define		sgmldir		%{_datadir}/sgml
 
 %description
 This package contains an SGML parser.
@@ -76,6 +74,7 @@ Biblioteki statyczne OpenSP.
 %{__autoheader}
 %{__automake}
 %configure \
+	--datadir=%{sgmldir} \
 	--enable-default-catalog=%{_sysconfdir}/sgml/catalog \
 	--enable-default-search-path=%{sgmldir} \
 	--enable-http
@@ -142,7 +141,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/spent
 %{_libdir}/libosp.so.*.*.*
 %ghost %{_libdir}/libosp.so.5
-%{_datadir}/OpenSP
+%{sgmldir}/OpenSP
 %{_mandir}/man1/onsgmls.1*
 %{_mandir}/man1/osgmlnorm.1*
 %{_mandir}/man1/ospam.1*
